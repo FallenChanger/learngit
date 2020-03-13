@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/job.css">
+	<link rel="stylesheet" type="text/css" href="css/font.css">
+</head>
+<body>
+	<!-- 外壳 -->
+	<div id="box">
+		<!-- 标签 -->
+		<span id="tag">123456789</span>
+		<!-- 表单盒子 -->
+		<div id="form">
+			<!-- 内容1 -->
+			<div id="content1">
+				<div class="yq">
+					<strong>样区</strong>
+					<span v-if="!editable">{{dataResultList[0]}}</span>
+					<span v-if="editable" class="editMode1">
+						<select v-model="dataTemp[0]">
+							<option>a</option>
+							<option>b</option>
+							<option>c</option>
+						</select>
+						<div class="edit glyphicon glyphicon-pencil"></div>
+						<div class="add glyphicon glyphicon-plus"></div>
+					</span>
+				</div>
+				<div class="sz">
+					<strong>树种</strong>
+					<span v-if="!editable">{{dataResultList[1]}}</span>
+					<span v-if="editable" class="editMode2">
+						<select v-model="dataTemp[1]" @click="showDropDown=!showDropDown"></select>
+						<!-- 下拉框 -->
+						<div @click.stop="dropdownClick" v-if="showDropDown" class="dropdown">
+							<div class="search">
+								<div id="searchBox" contenteditable></div>
+								<span @click="search" class="glyphicon glyphicon-search"></span>
+							</div>
+							<div>
+								<li v-for="site in dataDropDown">{{site}}</li>
+							</div>
+						</div>
+					</span>
+				</div>
+				<div>
+					<strong>学名</strong>
+					<span v-if="!editable">{{dataResultList[2]}}</span>
+					<span v-if="editable" class="editMode3">
+						<input v-model="dataTemp[2]" type="text">
+					</span>
+				</div>
+				<div>
+					<strong>里程位置</strong>
+					<span v-if="!editable">{{dataResultList[3]}}</span>
+					<span v-if="editable" class="editMode3">
+						<input v-model="dataTemp[3]" type="text">
+					</span>
+				</div>
+				<div>
+					<strong>位置</strong>
+					<span v-if="!editable">{{dataResultList[4]}}</span>
+					<span v-if="editable" class="editMode3">
+						<input v-model="dataTemp[4]" type="text">
+					</span>
+				</div>
+				<div>
+					<strong>DBH胸高直径(cm)</strong>
+					<span v-if="!editable">{{dataResultList[5]}}</span>
+					<span v-if="editable" class="editMode3">
+						<input v-model="dataTemp[5]" type="text">
+					</span>
+				</div>
+				<div>
+					<strong>树高(m)</strong>
+					<span v-if="!editable">{{dataResultList[6]}}</span>
+					<span v-if="editable" class="editMode3">
+						<input v-model="dataTemp[6]" type="text">
+					</span>
+				</div>
+				<div>
+					<strong>树冠幅(m2)</strong>
+					<span v-if="!editable">{{dataResultList[7]}}</span>
+					<span v-if="editable" class="editMode3">
+						<input v-model="dataTemp[7]" type="text">
+					</span>
+				</div>
+				<div>
+					<strong>记录日期</strong>
+					<span v-if="!editable">{{dataResultList[8]}}</span>
+					<span v-if="editable" class="editMode3">
+						<input v-model="dataTemp[8]" type="text">
+					</span>
+				</div>
+				<div>
+					<strong>备注</strong>
+					<span v-if="!editable">{{dataResultList[9]}}</span>
+					<span v-if="editable" class="editMode3">
+						<input v-model="dataTemp[9]" type="text">
+					</span>
+				</div>
+			</div>
+			<!-- 内容2 -->
+			<div id="content2">
+				<div class="head">
+					<div>植栽健康检测结果</div>
+					<span>分项结果表</span>
+				</div>
+				<div>
+					<strong>树木健康等级</strong>
+					<span v-if="!editable">{{dataResultList[10]}}</span>
+					<span v-if="editable" class="editMode4">
+						<select v-model="dataTemp[10]">
+							<option v-for="site in dataDropDown2" v-bind:value="site" v-show="dataTemp[10]!=site">{{site}}</option>
+						</select>
+					</span>
+				</div>
+				<div>
+					<strong>评断结果</strong>
+					<span v-if="!editable">{{dataResultList[11]}}</span>
+					<span v-if="editable" class="editMode3">
+						<input v-model="dataTemp[11]" type="text">
+					</span>
+				</div>
+				<div>
+					<strong>建议处置</strong>
+					<span v-if="!editable">{{dataResultList[12]}}</span>
+					<span v-if="editable" class="editMode3">
+						<input v-model="dataTemp[12]" type="text">
+					</span>
+				</div>
+			</div>
+			<!-- 按钮 -->
+			<div id="btns">
+				<span v-if="!editable" @click="toEdit" class="edit">编辑</span>
+				<span v-if="!editable" class="delete">删除</span>
+				<span v-if="editable" @click="toSave" class="save">保存</span>
+				<span v-if="editable" @click="toCancel" class="cancel">取消</span>
+			</div>
+		</div>
+		<!-- 图片显示 -->
+		<div id="imgs">
+			<img src="images/tree.png">
+			<img src="images/tree.png">
+			<img src="images/tree.png">
+			<img src="images/tree.png">
+		</div>
+	</div>
+
+	<!-- 引入vue.js -->
+	<script src="vue/vue2.6.11.js"></script>
+	<script type="text/javascript">
+		let vm=new Vue({
+			el: "#box",
+			data: {
+				editable: false,
+				dataNameList: [
+					"样区","树种","学名","里程位置","位置","DBH胸高直径(cm)","树高","树冠幅(m2)","记录日期","备注","树木健康等级","评断结果","建议处置"
+				],
+				dataResultList: ["","","","","","","","","","","","",""],
+				dataTemp: ["","","","","","","","","","","","",""],
+				showDropDown: false,//显示下拉框,
+				dataDropDown: ["树1","树2","树3","树1","树2","树3","树1","树2","树3"],//下拉框数据
+				dataDropDown2: ["1级","2级","3级","4级"],
+				showIndex: false//用于显示下拉框个数
+			},
+			mounted: function(){
+				let thisVue=this;
+				document.addEventListener("click", function(){
+					console.log('a')
+					// thisVue.showDropDown=false;
+				});
+			},
+			methods: {
+				toEdit: function(){
+					this.editable=true;
+				},
+				toSave: function(){
+					let thisVue=this;
+					//保存
+					thisVue.dataTemp.forEach(function(item,index){
+						thisVue.dataResultList[index]=item;
+					});
+					this.editable=false;
+				},
+				toCancel: function(){
+					//取消
+					this.editable=false;
+				},
+				dropdownClick: function(e){
+					let thisVue=this;
+					// 判断是否是li
+					if(e.target.localName!="li"){
+						return;
+					}
+					console.log('t')
+					//处理
+					thisVue.dataTemp[1]=e.target.innerHTML;
+				},
+				search: function(e){
+					//搜索
+					let sobj=document.getElementById("#searchBox");
+					let index=this.dataDropDown.indexOf(sobj.innerHTML);
+					if(index>0){
+
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>
