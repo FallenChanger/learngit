@@ -1,0 +1,253 @@
+/*公用值*/
+:root{
+	--bg-color-green: #367b39;
+	--bg-color-dgreen: #256a28;
+}
+/*初始化*/
+body {
+	margin: 0px;
+	padding: 0px;
+	background: #ccc;
+	font-size: 16px;
+	color: black;
+}
+li {
+	list-style: none;
+	padding: 0px;
+}
+select:focus {
+	outline: none;
+}
+/*==================左边开始==================*/
+#box {
+	width: 800px;
+	height: 800px;
+	margin: 30px auto;
+	background-color: var(--bg-color-green);
+	position: relative;
+}
+#tag {
+	width: 235px;
+	height: 45px;
+	line-height: 45px;
+	font-size: 20px;
+	color: #fff;
+	position: absolute;
+	left: -24px;
+	top: 15px;
+	background-color: var(--bg-color-green);
+	z-index: 9;
+	text-align: center;
+	border-radius: 0px 15px 15px 0; 
+}
+#tag::after {
+	content: "";
+	position: absolute;
+	left: 0px;
+	top: 100%;
+	border: 12px solid var(--bg-color-dgreen);
+	border-left-color: transparent;  
+	border-bottom-color: transparent;  
+}
+#form {
+	height: 100%;
+	width: 70%;
+	float: left;
+	background-color: #fff;
+	padding: 74px;
+	box-sizing: border-box;
+}
+#content1>div::after,#content2>div::after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
+	zoom: 1;
+}
+#content1>div,#content2>div {
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 2px solid gray;
+}
+#content1>div strong,#content2>div strong{
+	float: left;
+	width: 40%;
+	height: 100%;
+	padding-left: 20px;
+	box-sizing: border-box;
+}
+#content1>div>span,#content2>div>span {
+	float: right;
+	width: 60%;
+	height: 100%;
+	box-sizing: border-box;
+}
+/*编辑模式1样式*/
+.editMode1 select {
+	float: left;
+	background-color: gray;
+	width: 78%;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 3px;
+	margin-top: 5px;
+}
+.editMode1 div {
+	float: right;
+	color: white;
+	background-color: var(--bg-color-dgreen);
+	width: 10%;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	margin-top: 5px;
+}
+.editMode1 div:hover {
+	cursor: pointer;
+	color: white;
+	background-color: gray;
+}
+.editMode1 .add {
+	border-radius: 5px 0px 0px 5px;
+	border-right: 1px solid gray;
+	box-sizing: border-box;
+}
+.editMode1 .edit {
+	border-radius: 0px 5px 5px 0px;
+}
+
+/*编辑模式1样式*/
+/*编辑模式2、3样式*/
+.editMode2 {
+	position: relative;
+}
+.editMode2 select,.editMode3 input {
+	float: left;
+	background-color: gray;
+	border-radius: 3px;
+	margin-top: 5px;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	background-color: gray;
+	margin-top: 5px;
+}
+.editMode3 input {
+	background-color: white;
+	border: none;
+	outline: none;
+}
+/*模式4*/
+.editMode4 select {
+	float: left;
+	background-color: gray;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 3px;
+	margin-top: 5px;
+}
+/*下拉框*/
+.editMode2 .dropdown {
+	position: absolute;
+	width: 100%;
+	top: 35px;
+	left: 0px;
+	background-color: gray;
+}
+.editMode2 .dropdown .search {
+	margin-left: 20px;
+	position:relative;
+	margin-bottom: 10px;
+}
+.search div {
+	height: 40px;
+	width: 80%;
+	border-bottom: 2px solid black;
+}
+.search span {
+	position: absolute;
+	right: 0px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	width: 20%;
+}
+.editMode2 .dropdown div {
+	max-height: 300px;
+	overflow: auto;
+}
+.editMode2 .dropdown div li {
+	padding-left: 20px;
+	padding-right: 20px;
+	float: left;
+	width: 100%;
+	height: 35px;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+.editMode2 .dropdown li:hover {
+	background-color: orange;
+}
+/*编辑模式23样式*/
+#content2>div:first-child {
+	border-bottom: 5px solid gray;
+}
+#content2 .head {
+	margin-top: 40px;
+}
+#content2 .head div{
+	color: var(--bg-color-dgreen);
+	margin: 0px;
+	font-weight: 700;
+	float: left;
+	box-sizing: border-box;
+}
+#content2 .head>span {
+	text-align: right;
+}
+/*按钮*/
+#btns {
+	width: 100%;
+	margin: 30px 0px;
+	text-align: center; 
+}
+#btns span {
+	display: inline-block;
+	width: 55px;
+	height: 30px;
+	line-height: 30px;
+	margin: 0px 5px;
+	border-radius: 3px;
+	background-color: blue;
+	cursor: pointer;
+}
+#btns .edit {
+	background-color: blue;
+}
+#btns .delete {
+	background-color: red;
+}
+#btns .save {
+	background-color: green;
+}
+#btns .cancel {
+	background-color: gray;
+}
+/*==================左边结束==================*/
+
+
+/*==================右边开始==================*/
+#imgs {
+	width: 30%;
+	float: right;
+	padding-top: 55px;
+}
+#imgs img {
+	font-size: 0px;
+	vertical-align: top;
+	margin: 0px 15px;
+}
+/*==================右边结束==================*/
+
+
